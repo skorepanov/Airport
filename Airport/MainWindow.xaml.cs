@@ -1,6 +1,5 @@
 ﻿using Airport.Classes;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
@@ -24,11 +23,21 @@ namespace Airport
     /// </summary>
     public partial class MainWindow : Window
     {
+        public Schedule Schedule { get; set; }
+
         public MainWindow()
         {
-            // получить путь к файлу с данными из app.config
-            PlaneCollection planes = null;
+            bool dataLoaded = LoadData();
 
+            if (!dataLoaded)
+                return;
+
+            InitializeComponent();
+        }
+
+        private bool LoadData()
+        {
+            // получить путь к файлу с данными из app.config
             string settingName = "DataPath";
             string path = ConfigurationManager.AppSettings[settingName];
 
@@ -37,26 +46,23 @@ namespace Airport
                 MessageBox.Show($"Не указан путь к файлу в app.config (параметр {settingName})",
                     "Данные не найдены", MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
-                return;
+                return false;
             }
 
             // вычитать список рейсов
             try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(PlaneCollection));
-                StreamReader reader = new StreamReader(path);
-                planes = (PlaneCollection)serializer.Deserialize(reader);
-                reader.Close();
+                Schedule = new Schedule(path);
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, "Ошибка при чтении файла",
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 Close();
-                return;
+                return false;
             }
 
-            InitializeComponent();
+            return true;
         }
     }
 }
