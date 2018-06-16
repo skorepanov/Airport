@@ -1,6 +1,7 @@
 ﻿using Airport.Classes;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,13 +26,23 @@ namespace Airport
     {
         public MainWindow()
         {
-            // вычитать список рейсов
+            // получить путь к файлу с данными из app.config
             PlaneCollection planes = null;
 
+            string settingName = "DataPath";
+            string path = ConfigurationManager.AppSettings[settingName];
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                MessageBox.Show($"Не указан путь к файлу в app.config (параметр {settingName})",
+                    "Данные не найдены", MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+                return;
+            }
+
+            // вычитать список рейсов
             try
             {
-                string path = "../../Data/Planes.xml";
-
                 XmlSerializer serializer = new XmlSerializer(typeof(PlaneCollection));
                 StreamReader reader = new StreamReader(path);
                 planes = (PlaneCollection)serializer.Deserialize(reader);
@@ -39,8 +50,10 @@ namespace Airport
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message, "Ошибка при чтении файла");
-                Application.Current.Shutdown();
+                MessageBox.Show(exc.Message, "Ошибка при чтении файла",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                Close();
+                return;
             }
 
             InitializeComponent();
