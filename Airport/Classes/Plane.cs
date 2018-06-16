@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Airport.Classes
@@ -54,6 +50,6 @@ namespace Airport.Classes
     {
         [XmlArray("Planes")]
         [XmlArrayItem("Plane", typeof(Plane))]
-        public Plane[] Plane { get; set; }
+        public Plane[] Planes { get; set; }
     }
 }
