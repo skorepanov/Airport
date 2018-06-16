@@ -5,8 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Аэропорт" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0">
+            <!--Скорость имитации (1 - 10000)-->
+            <StackPanel Margin="5"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Orientation="Horizontal" Height="25">
+                <Label Content="Скорость имитации (1 - 10000):" />
+                <TextBox Text="" Width="70" />
+            </StackPanel>
+
+            <!--Последний рейс-->
+            <TextBlock Text="Последний рейс" Margin="0,0,0,5"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+
+            <!--Текущее время-->
+            <StackPanel Margin="5"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Orientation="Horizontal" Height="25">
+                <Label Content="Текущее время:" />
+                <TextBlock Text="" />
+            </StackPanel>
+        </Grid>
         
+        <!--Количество пассажиров (прилет)-->
+        <StackPanel Background="Green" Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="Количество пассажиров (прилет)"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="В последнем рейсе:" />
+                <TextBlock Text="15" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="За последние 24 часа:" />
+                <TextBlock Text="15" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="За всё время:" />
+                <TextBlock Text="15" />
+            </StackPanel>
+        </StackPanel>
+
+
+        <!--Количество пассажиров (вылет)-->
+        <StackPanel Background="Yellow" Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Количество пассажиров (вылет)"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="В последнем рейсе:" />
+                <TextBlock Text="25" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="За последние 24 часа:" />
+                <TextBlock Text="25" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="За всё время:" />
+                <TextBlock Text="25" />
+            </StackPanel>
+        </StackPanel>
+
+        <!--Гистограмма-->
+        <TextBlock Text="Гистограмма" Grid.ColumnSpan="2"
+                   Grid.Row="2" Grid.Column="0"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </Window>
