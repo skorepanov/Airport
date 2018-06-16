@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PlaneCollection>
+    <Planes>
+        <Plane>
+            <Model>Type1</Model>
+            <Direction>In</Direction>
+            <Time>2018-06-16T16:00:00</Time>
+            <City>Пермь</City>
+        </Plane>
+        <Plane>
+            <Model>Type2</Model>
+            <Direction>Out</Direction>
+            <Time>2018-06-16T17:00:00</Time>
+            <City>Пермь</City>
+        </Plane>
+        <Plane>
+            <Model>Type3</Model>
+            <Direction>Out</Direction>
+            <Time>2018-06-16T18:00:00</Time>
+            <City>Москва</City>
+        </Plane>
+    </Planes>
+</PlaneCollection>
