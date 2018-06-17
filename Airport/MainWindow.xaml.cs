@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -32,6 +33,9 @@ namespace Airport
                 return;
 
             InitializeComponent();
+
+            // задать источник данных для гистограммы
+            ((ColumnSeries)ChartAccumulation.Series[0]).ItemsSource = Schedule.Accumulation;
         }
 
         private bool LoadData()

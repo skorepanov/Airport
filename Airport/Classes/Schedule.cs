@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace Airport.Classes
 {
@@ -17,6 +18,7 @@ namespace Airport.Classes
         public int PeopleNumberOfLastPlaneOut { get; private set; }
         public int PeopleNumberOfLast24HoursOut { get; private set; }
         public int PeopleNumberOfAllPlanesOut { get; private set; }
+        public Dictionary<string, int> Accumulation { get; private set; }
 
         private DateTime _CurrentTime;
 
@@ -136,6 +138,17 @@ namespace Airport.Classes
                 PeopleNumberOfAllPlanesOut = pastPlanesOut
                     .Sum(p => p.NumberOfPassengers);
             }
+
+
+            // данные для гистограммы
+            Accumulation = new Dictionary<string, int>
+            {
+                { "15:00-16:00", 15 },
+                { "16:00-17:00", 78 },
+                { "17:00-18:00", 40 },
+                { "18:00-19:00", 96 },
+                { "19:00-20:00", 87 }
+            };
         }
     }
 }

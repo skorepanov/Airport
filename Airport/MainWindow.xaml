@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         xmlns:local="clr-namespace:Airport"
         mc:Ignorable="d"
         x:Name="Window"
@@ -77,8 +78,14 @@
         </StackPanel>
 
         <!--Гистограмма-->
-        <TextBlock Text="Гистограмма" Grid.ColumnSpan="2"
-                   Grid.Row="2" Grid.Column="0"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <DVC:Chart Name="ChartAccumulation" Canvas.Top="80" Canvas.Left="10"
+                       Background="LightSteelBlue">
+                <DVC:Chart.Series>
+                    <DVC:ColumnSeries IndependentValueBinding="{Binding Path=Key}"
+                                      DependentValueBinding="{Binding Path=Value}" Title="Кол-во пассажиров" Margin="0,0,0.2,-0.2"/>
+                </DVC:Chart.Series>
+            </DVC:Chart>
+        </Grid>
     </Grid>
 </Window>
