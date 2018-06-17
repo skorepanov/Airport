@@ -30,7 +30,8 @@
 
             <!--Последний рейс-->
             <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                       Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString}" />
+                       Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString}"
+                       FontSize="12" FontWeight="Bold"/>
 
             <!--Текущее время-->
             <StackPanel Margin="5"
@@ -42,7 +43,7 @@
         </Grid>
         
         <!--Количество пассажиров (прилет)-->
-        <StackPanel Background="Green" Grid.Row="1" Grid.Column="0">
+        <StackPanel Background="LightGreen" Grid.Row="1" Grid.Column="0">
             <TextBlock Text="Количество пассажиров (прилет)"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -61,7 +62,7 @@
 
 
         <!--Количество пассажиров (вылет)-->
-        <StackPanel Background="Yellow" Grid.Row="1" Grid.Column="1">
+        <StackPanel Background="LightYellow" Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Количество пассажиров (вылет)"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -83,7 +84,24 @@
             <DVC:Chart Name="ChartAccumulation" Background="LightSteelBlue" FontSize="9">
                 <DVC:Chart.Series>
                     <DVC:ColumnSeries IndependentValueBinding="{Binding Path=Key}"
-                                      DependentValueBinding="{Binding Path=Value}" />
+                                      DependentValueBinding="{Binding Path=Value}">
+                        <DVC:ColumnSeries.DataPointStyle>
+                            <Style TargetType="DVC:ColumnDataPoint">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DVC:ColumnDataPoint">
+                                            <Grid>
+                                                <Rectangle Fill="{TemplateBinding Background}" Stroke="Black"/>
+                                                <Grid Margin="0 -12 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                                    <TextBlock Text="{TemplateBinding FormattedDependentValue}" FontSize="10" />
+                                                </Grid>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DVC:ColumnSeries.DataPointStyle>
+                    </DVC:ColumnSeries>
                 </DVC:Chart.Series>
                 <DVC:Chart.LegendStyle>
                     <Style TargetType="DV:Legend">
