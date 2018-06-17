@@ -9,9 +9,24 @@ namespace Airport.Classes
     {
         public Plane[] Planes { get; set; }
         public int ImitationSpeed { get; set; }
-        public Plane LastPlaneIn { get; set; }
-        public Plane LastPlaneOut { get; set; }
-        public DateTime CurrentTime { get; set; }
+        public Plane LastPlane { get; set; }
+        
+        public int PeopleNumberOfLastPlaneIn { get; set; }
+        public int PeopleNumberOfLast24HoursIn { get; set; }
+        public int PeopleNumberOfAllPlanesIn { get; set; }
+        public int PeopleNumberOfLastPlaneOut { get; set; }
+        public int PeopleNumberOfLast24HoursOut { get; set; }
+        public int PeopleNumberOfAllPlanesOut { get; set; }
+
+        private DateTime _CurrentTime;
+
+        public string CurrentTimeString
+        {
+            get
+            {
+                return _CurrentTime.ToString("HH:mm:ss dd.MM.yyyy");
+            }
+        }
 
         public Schedule(string path)
         {
@@ -31,8 +46,15 @@ namespace Airport.Classes
                 Planes = planes.Planes.OrderBy(p => p.Time).ToArray();
             }
 
+            // проставить случайное количество пассажиров
+            Random random = new Random();
+            foreach (Plane plane in Planes)
+            {
+                plane.NumberOfPassengers = random.Next((int)plane.Model);
+            }
+
             // сохранить текущее время и скорость имитации
-            CurrentTime = DateTime.Now;
+            _CurrentTime = DateTime.Now;
             ImitationSpeed = 1;
         }
     }

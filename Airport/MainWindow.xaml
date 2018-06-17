@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport"
         mc:Ignorable="d"
+        x:Name="Window"
         Title="Аэропорт" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -19,41 +20,40 @@
 
         <Grid Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0">
             <!--Скорость имитации (1 - 10000)-->
-            <StackPanel Margin="5"
-                    HorizontalAlignment="Left" VerticalAlignment="Top"
+            <StackPanel Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top"
                     Orientation="Horizontal" Height="25">
-                <Label Content="Скорость имитации (1 - 10000):" />
-                <TextBox Text="" Width="70" />
+                <Label Content="Скорость имитации (1 - 10000):" FontWeight="Bold" />
+                <TextBox Text="{Binding ElementName=Window, Path=Schedule.ImitationSpeed,Mode=TwoWay}" Width="70" />
             </StackPanel>
 
             <!--Последний рейс-->
-            <TextBlock Text="Последний рейс" Margin="0,0,0,5"
-                   HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                       Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString}" />
 
             <!--Текущее время-->
             <StackPanel Margin="5"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Orientation="Horizontal" Height="25">
-                <Label Content="Текущее время:" />
-                <TextBlock Text="" />
+                <Label Content="Текущее время:" FontWeight="Bold" />
+                <TextBlock Text="15:50:50 17.06.2018" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
         
         <!--Количество пассажиров (прилет)-->
         <StackPanel Background="Green" Grid.Row="1" Grid.Column="0">
             <TextBlock Text="Количество пассажиров (прилет)"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="В последнем рейсе:" />
-                <TextBlock Text="15" />
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneIn}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="За последние 24 часа:" />
-                <TextBlock Text="15" />
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursIn}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="За всё время:" />
-                <TextBlock Text="15" />
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesIn}" />
             </StackPanel>
         </StackPanel>
 
@@ -61,18 +61,18 @@
         <!--Количество пассажиров (вылет)-->
         <StackPanel Background="Yellow" Grid.Row="1" Grid.Column="1">
             <TextBlock Text="Количество пассажиров (вылет)"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="В последнем рейсе:" />
-                <TextBlock Text="25" />
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneOut}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="За последние 24 часа:" />
-                <TextBlock Text="25" />
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursOut}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="За всё время:" />
-                <TextBlock Text="25" />
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesOut}" />
             </StackPanel>
         </StackPanel>
 
