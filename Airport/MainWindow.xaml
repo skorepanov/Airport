@@ -38,7 +38,7 @@
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Orientation="Horizontal" Height="25">
                 <Label Content="Текущее время:" FontWeight="Bold" />
-                <TextBlock Text="15:50:50 17.06.2018" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.CurrentTimeString}" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
         

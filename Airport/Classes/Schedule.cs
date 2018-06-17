@@ -3,24 +3,45 @@ using System.Linq;
 using System.IO;
 using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Airport.Classes
 {
-    public class Schedule
+    public class Schedule : INotifyPropertyChanged
     {
-        public Plane[] Planes { get; set; }
-        public int ImitationSpeed { get; set; }
-        public Plane LastPlane { get; set; }
-        
-        public int PeopleNumberOfLastPlaneIn { get; private set; }
-        public int PeopleNumberOfLast24HoursIn { get; private set; }
-        public int PeopleNumberOfAllPlanesIn { get; private set; }
-        public int PeopleNumberOfLastPlaneOut { get; private set; }
-        public int PeopleNumberOfLast24HoursOut { get; private set; }
-        public int PeopleNumberOfAllPlanesOut { get; private set; }
-        public Dictionary<string, int> Accumulation { get; private set; }
-
+        private int _ImitationSpeed = 1;
         private DateTime _CurrentTime;
+
+        public Plane[] Planes { get; set; }
+        public Plane LastPlane { get; set; }
+
+        public int ImitationSpeed
+        {
+            get
+            {
+                return _ImitationSpeed;
+            }
+            set
+            {
+                _ImitationSpeed = value;
+                OnPropertyChanged("ImitationSpeed");
+            }
+        }
+
+        public DateTime CurrentTime
+        {
+            get
+            {
+                return _CurrentTime;
+            }
+            set
+            {
+                _CurrentTime = value;
+                OnPropertyChanged("CurrentTime");
+                OnPropertyChanged("CurrentTimeString");
+            }
+        }
 
         public string CurrentTimeString
         {
@@ -30,6 +51,95 @@ namespace Airport.Classes
             }
         }
 
+        #region Поля-счетчики пассажиров
+        private int _PeopleNumberOfLastPlaneIn = 0;
+        private int _PeopleNumberOfLast24HoursIn = 0;
+        private int _PeopleNumberOfAllPlanesIn = 0;
+        private int _PeopleNumberOfLastPlaneOut = 0;
+        private int _PeopleNumberOfLast24HoursOut = 0;
+        private int _PeopleNumberOfAllPlanesOut = 0;
+        
+        public int PeopleNumberOfLastPlaneIn
+        {
+            get
+            {
+                return _PeopleNumberOfLastPlaneIn;
+            }
+            set
+            {
+                _PeopleNumberOfLastPlaneIn = value;
+                OnPropertyChanged("PeopleNumberOfLastPlaneIn");
+            }
+        }
+
+        public int PeopleNumberOfLast24HoursIn
+        {
+            get
+            {
+                return _PeopleNumberOfLast24HoursIn;
+            }
+            set
+            {
+                _PeopleNumberOfLast24HoursIn = value;
+                OnPropertyChanged("PeopleNumberOfLast24HoursIn");
+            }
+        }
+
+        public int PeopleNumberOfAllPlanesIn
+        {
+            get
+            {
+                return _PeopleNumberOfAllPlanesIn;
+            }
+            set
+            {
+                _PeopleNumberOfAllPlanesIn = value;
+                OnPropertyChanged("PeopleNumberOfAllPlanesIn");
+            }
+        }
+        
+        public int PeopleNumberOfLastPlaneOut
+        {
+            get
+            {
+                return _PeopleNumberOfLastPlaneOut;
+            }
+            set
+            {
+                _PeopleNumberOfLastPlaneOut = value;
+                OnPropertyChanged("PeopleNumberOfLastPlaneOut");
+            }
+        }
+
+        public int PeopleNumberOfLast24HoursOut
+        {
+            get
+            {
+                return _PeopleNumberOfLast24HoursOut;
+            }
+            set
+            {
+                _PeopleNumberOfLast24HoursOut = value;
+                OnPropertyChanged("PeopleNumberOfLast24HoursOut");
+            }
+        }
+
+        public int PeopleNumberOfAllPlanesOut
+        {
+            get
+            {
+                return _PeopleNumberOfAllPlanesOut;
+            }
+            set
+            {
+                _PeopleNumberOfAllPlanesOut = value;
+                OnPropertyChanged("PeopleNumberOfAllPlanesOut");
+            }
+        }
+        #endregion Поля-счетчики пассажиров
+
+        public Dictionary<string, int> Accumulation { get; private set; }
+        
         public Schedule(string path)
         {
             // вычитать данные
@@ -56,9 +166,29 @@ namespace Airport.Classes
             }
 
             // сохранить текущее время и скорость имитации
-            _CurrentTime = DateTime.Now;
+            CurrentTime = DateTime.Now;
             ImitationSpeed = 1;
 
+            CountPassengers();
+
+            // запустить таймер
+            CreateTimer();
+        }
+
+        public void CreateTimer()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                System.Timers.Timer timer = new System.Timers.Timer();
+                timer.Elapsed += UpdateCurrentTime;
+                timer.Interval = ImitationSpeed * 1000;
+                timer.Start();
+            });
+        }
+
+        public void UpdateCurrentTime(object sender, EventArgs e)
+        {
+            CurrentTime = CurrentTime.AddMilliseconds(ImitationSpeed * 1000);
             CountPassengers();
         }
 
@@ -161,5 +291,18 @@ namespace Airport.Classes
                 time = time.AddHours(1);
             }
         }
+
+        #region INotifyPropertyChanged implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string info)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(info));
+            }
+        }
+        #endregion Property changed handler
     }
 }
