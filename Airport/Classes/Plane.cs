@@ -36,18 +36,15 @@ namespace Airport.Classes
         public string City { get; set; }
         
 
-        private DateTime? _Time = null;
+        private DateTime _Time;
 
         /// <summary>
         /// Время вылета/прилёта
         /// </summary>
-        public DateTime? Time
+        public DateTime Time
         {
             get
             {
-                if (_Time != null)
-                    return _Time;
-
                 if (!string.IsNullOrWhiteSpace(TimeStr))
                 {
                     try
@@ -84,7 +81,7 @@ namespace Airport.Classes
                         : "вылетел в город";
 
                     return $"{modelStr} {direction} {City} " +
-                        $"в {Time.Value.ToString("HH:mm:ss dd.MM.yyyy")} " +
+                        $"в {Time.ToString("HH:mm:ss dd.MM.yyyy")} " +
                         $"с {NumberOfPassengers} пассажирами";
                 }
             }

@@ -257,7 +257,7 @@ namespace Airport.Classes
 
             // найти последний рейс
             LastPlane = pastPlanes
-                .OrderByDescending(p => p.Time.Value)
+                .OrderByDescending(p => p.Time)
                 .First();
 
 
@@ -274,7 +274,7 @@ namespace Airport.Classes
             else
             {
                 PeopleNumberOfLastPlaneIn = pastPlanesIn
-                    .OrderByDescending(p => p.Time.Value)
+                    .OrderByDescending(p => p.Time)
                     .First()
                     .NumberOfPassengers;
 
@@ -299,7 +299,7 @@ namespace Airport.Classes
             else
             {
                 PeopleNumberOfLastPlaneOut = pastPlanesOut
-                    .OrderByDescending(p => p.Time.Value)
+                    .OrderByDescending(p => p.Time)
                     .First()
                     .NumberOfPassengers;
 
@@ -322,10 +322,10 @@ namespace Airport.Classes
 
                 int number =
                     (from Plane p in pastPlanes
-                     where p.Time.Value.Year == time.Year &&
-                         p.Time.Value.Month == time.Month &&
-                         p.Time.Value.Day == time.Day &&
-                         p.Time.Value.Hour == time.Hour
+                     where p.Time.Year == time.Year &&
+                         p.Time.Month == time.Month &&
+                         p.Time.Day == time.Day &&
+                         p.Time.Hour == time.Hour
                      select p.NumberOfPassengers).Sum();
                 
                 Accumulation.Add(range, number);
