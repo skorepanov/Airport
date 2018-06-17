@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:Airport"
         mc:Ignorable="d"
         x:Name="Window"
-        Title="Аэропорт" Height="450" Width="800">
+        Title="Аэропорт" Height="400" Width="850">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -80,11 +80,10 @@
 
         <!--Гистограмма-->
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <DVC:Chart Name="ChartAccumulation" Canvas.Top="80" Canvas.Left="10"
-                       Background="LightSteelBlue">
+            <DVC:Chart Name="ChartAccumulation" Background="LightSteelBlue" FontSize="9">
                 <DVC:Chart.Series>
                     <DVC:ColumnSeries IndependentValueBinding="{Binding Path=Key}"
-                                      DependentValueBinding="{Binding Path=Value}" Title="Кол-во пассажиров" />
+                                      DependentValueBinding="{Binding Path=Value}" />
                 </DVC:Chart.Series>
                 <DVC:Chart.LegendStyle>
                     <Style TargetType="DV:Legend">
