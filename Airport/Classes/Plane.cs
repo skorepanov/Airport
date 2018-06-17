@@ -42,6 +42,21 @@ namespace Airport.Classes
         }
 
         public int NumberOfPassengers { get; set; }
+
+        public string ByString
+        {
+            get
+            {
+                {
+                    string direction = Direction == PlaneDirection.In
+                        ? "прилетел из города"
+                        : "вылетел в город";
+                    return $"{Model.ToString()} {direction} {City} " +
+                        $"в {Time.Value.ToString("HH:mm:ss dd.MM.yyyy")} " +
+                        $"с {NumberOfPassengers} пассажирами";
+                }
+            }
+        }
     }
 
     [Serializable()]
