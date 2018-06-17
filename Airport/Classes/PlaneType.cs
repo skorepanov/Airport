@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Airport.Classes
 {
@@ -11,8 +7,16 @@ namespace Airport.Classes
     /// </summary>
     public enum PlaneType
     {
-        Type1 = 100,
-        Type2 = 200,
-        Type3 = 300
+        [Description("Ту-134")]
+        TU134 = 96,
+
+        [Description("Ту-204")]
+        TU204 = 214,
+
+        [Description("ИЛ-62")]
+        IL62 = 198,
+
+        [Description("A310")]
+        A310 = 183
     }
 }

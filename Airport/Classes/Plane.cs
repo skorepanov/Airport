@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Reflection;
 using System.Xml.Serialization;
 
 namespace Airport.Classes
@@ -72,10 +74,16 @@ namespace Airport.Classes
             get
             {
                 {
+                    Type type = typeof(PlaneType);
+                    MemberInfo[] memInfo = type.GetMember(Model.ToString());
+                    object[] attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                    string modelStr = ((DescriptionAttribute)attributes[0]).Description;
+                    
                     string direction = Direction == PlaneDirection.In
                         ? "прилетел из города"
                         : "вылетел в город";
-                    return $"{Model.ToString()} {direction} {City} " +
+
+                    return $"{modelStr} {direction} {City} " +
                         $"в {Time.Value.ToString("HH:mm:ss dd.MM.yyyy")} " +
                         $"с {NumberOfPassengers} пассажирами";
                 }
