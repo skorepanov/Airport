@@ -140,15 +140,26 @@ namespace Airport.Classes
             }
 
 
-            // данные для гистограммы
-            Accumulation = new Dictionary<string, int>
+            // данные для гистограммы - кол-во пассажиров по каждому часу за последние 24 часа
+            DateTime time = yesterday;
+            Accumulation = new Dictionary<string, int>();
+
+            for (int i = 0; i < 24; i++)
             {
-                { "15:00-16:00", 15 },
-                { "16:00-17:00", 78 },
-                { "17:00-18:00", 40 },
-                { "18:00-19:00", 96 },
-                { "19:00-20:00", 87 }
-            };
+                string range = $"{time.Hour}:00-{time.AddHours(1).Hour}:00";
+
+                int number =
+                    (from Plane p in pastPlanes
+                     where p.Time.Value.Year == time.Year &&
+                         p.Time.Value.Month == time.Month &&
+                         p.Time.Value.Day == time.Day &&
+                         p.Time.Value.Hour == time.Hour
+                     select p.NumberOfPassengers).Sum();
+                
+                Accumulation.Add(range, number);
+
+                time = time.AddHours(1);
+            }
         }
     }
 }
