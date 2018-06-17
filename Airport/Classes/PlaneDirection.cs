@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Airport.Classes
 {
+    /// <summary>
+    /// Направление полёта
+    /// </summary>
     public enum PlaneDirection
     {
         In,

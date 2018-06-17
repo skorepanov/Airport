@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Airport.Classes
 {
+    /// <summary>
+    /// Тип самолёта
+    /// </summary>
     public enum PlaneType
     {
         Type1 = 100,

@@ -14,9 +14,19 @@ namespace Airport.Classes
         private DateTime _CurrentTime;
         private Plane _LastPlane = null;
 
+        /// <summary>
+        /// Массив всех рейсов
+        /// </summary>
         public Plane[] Planes { get; set; }
+
+        /// <summary>
+        /// Накопление кол-ва пассажиров по часам
+        /// </summary>
         public Dictionary<string, int> Accumulation { get; private set; }
 
+        /// <summary>
+        /// Скорость имитации
+        /// </summary>
         public int ImitationSpeed
         {
             get
@@ -30,6 +40,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Текущее время имитации
+        /// </summary>
         public DateTime CurrentTime
         {
             get
@@ -44,6 +57,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Текущее время имитации строкой
+        /// </summary>
         public string CurrentTimeString
         {
             get
@@ -52,6 +68,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Последний рейс на текущий момент
+        /// </summary>
         public Plane LastPlane
         {
             get
@@ -73,6 +92,9 @@ namespace Airport.Classes
         private int _PeopleNumberOfLast24HoursOut = 0;
         private int _PeopleNumberOfAllPlanesOut = 0;
         
+        /// <summary>
+        /// Кол-во пассажиров последнего рейса (прилёт)
+        /// </summary>
         public int PeopleNumberOfLastPlaneIn
         {
             get
@@ -86,6 +108,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Кол-во пассажиров за последние 24 часа (прилёт)
+        /// </summary>
         public int PeopleNumberOfLast24HoursIn
         {
             get
@@ -99,6 +124,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Кол-во пассажиров за всё время (прилёт)
+        /// </summary>
         public int PeopleNumberOfAllPlanesIn
         {
             get
@@ -111,7 +139,10 @@ namespace Airport.Classes
                 OnPropertyChanged("PeopleNumberOfAllPlanesIn");
             }
         }
-        
+
+        /// <summary>
+        /// Кол-во пассажиров последнего рейса (вылет)
+        /// </summary>
         public int PeopleNumberOfLastPlaneOut
         {
             get
@@ -125,6 +156,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Кол-во пассажиров последнего рейса (вылет)
+        /// </summary>
         public int PeopleNumberOfLast24HoursOut
         {
             get
@@ -138,6 +172,9 @@ namespace Airport.Classes
             }
         }
 
+        /// <summary>
+        /// Кол-во пассажиров последнего рейса (вылет)
+        /// </summary>
         public int PeopleNumberOfAllPlanesOut
         {
             get
@@ -185,13 +222,13 @@ namespace Airport.Classes
             Task.Factory.StartNew(() =>
             {
                 System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Elapsed += UpdateCurrentTime;
+                timer.Elapsed += ImitationTick;
                 timer.Interval = ImitationSpeed * 1000;
                 timer.Start();
             });
         }
 
-        public void UpdateCurrentTime(object sender, EventArgs e)
+        public void ImitationTick(object sender, EventArgs e)
         {
             CurrentTime = CurrentTime.AddMilliseconds(ImitationSpeed * 1000);
             CountPassengers();
@@ -202,7 +239,7 @@ namespace Airport.Classes
         /// </summary>
         public void CountPassengers()
         {
-            // все прошедшие рейсы
+            // определить все прошедшие рейсы
             var pastPlanes = Planes.Where(p => p.Time <= _CurrentTime);
 
             if (pastPlanes.Count() == 0)
@@ -218,13 +255,13 @@ namespace Airport.Classes
             }
 
 
-            // последний рейс
+            // найти последний рейс
             LastPlane = pastPlanes
                 .OrderByDescending(p => p.Time.Value)
                 .First();
 
 
-            // количество пассажиров (прилёт)
+            // рассчитать количество пассажиров (прилёт)
             var pastPlanesIn = pastPlanes.Where(p => p.Direction == PlaneDirection.In);
             DateTime yesterday = _CurrentTime.AddHours(-24);
 
@@ -250,7 +287,7 @@ namespace Airport.Classes
             }
 
 
-            // количество пассажиров (вылет)
+            // рассчитать количество пассажиров (вылет)
             var pastPlanesOut = pastPlanes.Where(p => p.Direction == PlaneDirection.Out);
             
             if (pastPlanesOut.Count() == 0)
@@ -275,7 +312,7 @@ namespace Airport.Classes
             }
 
 
-            // данные для гистограммы - кол-во пассажиров по каждому часу за последние 24 часа
+            // собрать данные для гистограммы - кол-во пассажиров по каждому часу за последние 24 часа
             DateTime time = yesterday;
             Accumulation = new Dictionary<string, int>();
 
