@@ -12,9 +12,10 @@ namespace Airport.Classes
     {
         private int _ImitationSpeed = 1;
         private DateTime _CurrentTime;
+        private Plane _LastPlane = null;
 
         public Plane[] Planes { get; set; }
-        public Plane LastPlane { get; set; }
+        public Dictionary<string, int> Accumulation { get; private set; }
 
         public int ImitationSpeed
         {
@@ -48,6 +49,19 @@ namespace Airport.Classes
             get
             {
                 return _CurrentTime.ToString("HH:mm:ss dd.MM.yyyy");
+            }
+        }
+
+        public Plane LastPlane
+        {
+            get
+            {
+                return _LastPlane;
+            }
+            set
+            {
+                _LastPlane = value;
+                OnPropertyChanged("LastPlane");
             }
         }
 
@@ -138,26 +152,17 @@ namespace Airport.Classes
         }
         #endregion Поля-счетчики пассажиров
 
-        public Dictionary<string, int> Accumulation { get; private set; }
-        
         public Schedule(string path)
         {
             // вычитать данные
-            PlaneCollection planes = null;
-
             XmlSerializer serializer = new XmlSerializer(typeof(PlaneCollection));
 
             using (StreamReader reader = new StreamReader(path))
             {
-                planes = (PlaneCollection)serializer.Deserialize(reader);
+                PlaneCollection collection = (PlaneCollection)serializer.Deserialize(reader);
+                Planes = collection.Planes.ToArray();
             }
-
-            // отсортировать рейсы по дате
-            if (planes != null)
-            {
-                Planes = planes.Planes.OrderBy(p => p.Time).ToArray();
-            }
-
+            
             // проставить случайное количество пассажиров
             Random random = new Random();
             foreach (Plane plane in Planes)
