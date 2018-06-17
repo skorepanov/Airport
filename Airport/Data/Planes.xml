@@ -2,34 +2,34 @@
 <PlaneCollection>
     <Planes>
         <Plane>
-            <Model>Type1</Model>
+            <Model>TU134</Model>
             <Direction>In</Direction>
-            <Time>2018-06-17T10:00:00</Time>
+            <Time>2018-06-18T01:15:00</Time>
             <City>Пермь</City>
         </Plane>
         <Plane>
-            <Model>Type2</Model>
+            <Model>TU204</Model>
             <Direction>Out</Direction>
-            <Time>2018-06-17T11:00:00</Time>
+            <Time>2018-06-18T01:20:00</Time>
             <City>Пермь</City>
         </Plane>
         <Plane>
-            <Model>Type3</Model>
+            <Model>IL62</Model>
             <Direction>Out</Direction>
             <Time>2018-06-17T12:00:00</Time>
             <City>Москва</City>
         </Plane>
         <Plane>
-            <Model>Type3</Model>
+            <Model>A310</Model>
             <Direction>Out</Direction>
-            <Time>2018-06-17T12:15:00</Time>
-            <City>Москва</City>
+            <Time>2018-06-17T22:50:00</Time>
+            <City>Казань</City>
         </Plane>
         <Plane>
-            <Model>Type3</Model>
-            <Direction>Out</Direction>
-            <Time>2018-06-17T12:59:00</Time>
-            <City>Москва</City>
+            <Model>TU134</Model>
+            <Direction>In</Direction>
+            <Time>2018-06-17T22:55:00</Time>
+            <City>Екатеринбург</City>
         </Plane>
     </Planes>
 </PlaneCollection>
