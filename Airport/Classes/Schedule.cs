@@ -35,8 +35,11 @@ namespace Airport.Classes
             }
             set
             {
-                _ImitationSpeed = value;
-                OnPropertyChanged("ImitationSpeed");
+                if (1 <= value && value <= 10000)
+                {
+                    _ImitationSpeed = value;
+                    OnPropertyChanged("ImitationSpeed");
+                }
             }
         }
 
