@@ -14,8 +14,19 @@
             <GradientStop Color="LightCyan" Offset="0" />
             <GradientStop Color="LightSteelBlue" Offset="1" />
         </LinearGradientBrush>
-        <Style TargetType="StackPanel" x:Key="PassengersStats">
+        <Style TargetType="Grid" x:Key="PassengersStats">
             <Setter Property="Background" Value="{StaticResource Brush}" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="Blue" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="LastPlane">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="SteelBlue" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -41,7 +52,7 @@
             <!--Последний рейс-->
             <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                        Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString}"
-                       FontSize="12" FontWeight="Bold"/>
+                       Style="{StaticResource LastPlane}" />
 
             <!--Текущее время-->
             <StackPanel Margin="5"
@@ -53,41 +64,45 @@
         </Grid>
         
         <!--Количество пассажиров (прилет)-->
-        <StackPanel Style="{StaticResource PassengersStats}" Grid.Row="1" Grid.Column="0">
-            <TextBlock Text="Количество пассажиров (прилет)"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="В последнем рейсе: " />
-                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneIn}" />
+        <Grid Style="{StaticResource PassengersStats}" Grid.Row="1" Grid.Column="0">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Количество пассажиров (прилет)"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="В последнем рейсе: " />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneIn}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="За последние 24 часа: " />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursIn}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="За всё время: " />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesIn}" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="За последние 24 часа: " />
-                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursIn}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="За всё время: " />
-                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesIn}" />
-            </StackPanel>
-        </StackPanel>
+        </Grid>
 
 
         <!--Количество пассажиров (вылет)-->
-        <StackPanel Style="{StaticResource PassengersStats}" Grid.Row="1" Grid.Column="1" Margin="0">
-            <TextBlock Text="Количество пассажиров (вылет)"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="В последнем рейсе: " />
-                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneOut}" />
+        <Grid Style="{StaticResource PassengersStats}" Grid.Row="1" Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Количество пассажиров (вылет)"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="В последнем рейсе: " />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneOut}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="За последние 24 часа: " />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursOut}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="За всё время: " />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesOut}" />
+                </StackPanel>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="За последние 24 часа: " />
-                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursOut}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="За всё время: " />
-                <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesOut}" />
-            </StackPanel>
-        </StackPanel>
+        </Grid>
 
         <!--Гистограмма-->
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
