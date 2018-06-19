@@ -109,8 +109,11 @@ namespace Airport.Classes
             }
             set
             {
-                _PeopleNumberOfLastPlaneIn = value;
-                OnPropertyChanged("PeopleNumberOfLastPlaneIn");
+                if (_PeopleNumberOfLastPlaneIn != value)
+                {
+                    _PeopleNumberOfLastPlaneIn = value;
+                    OnPropertyChanged("PeopleNumberOfLastPlaneIn");
+                }
             }
         }
 
@@ -125,8 +128,11 @@ namespace Airport.Classes
             }
             set
             {
-                _PeopleNumberOfLast24HoursIn = value;
-                OnPropertyChanged("PeopleNumberOfLast24HoursIn");
+                if (_PeopleNumberOfLast24HoursIn != value)
+                {
+                    _PeopleNumberOfLast24HoursIn = value;
+                    OnPropertyChanged("PeopleNumberOfLast24HoursIn"); 
+                }
             }
         }
 
@@ -141,8 +147,11 @@ namespace Airport.Classes
             }
             set
             {
-                _PeopleNumberOfAllPlanesIn = value;
-                OnPropertyChanged("PeopleNumberOfAllPlanesIn");
+                if (_PeopleNumberOfAllPlanesIn != value)
+                {
+                    _PeopleNumberOfAllPlanesIn = value;
+                    OnPropertyChanged("PeopleNumberOfAllPlanesIn"); 
+                }
             }
         }
 
@@ -157,8 +166,11 @@ namespace Airport.Classes
             }
             set
             {
-                _PeopleNumberOfLastPlaneOut = value;
-                OnPropertyChanged("PeopleNumberOfLastPlaneOut");
+                if (_PeopleNumberOfLastPlaneOut != value)
+                {
+                    _PeopleNumberOfLastPlaneOut = value;
+                    OnPropertyChanged("PeopleNumberOfLastPlaneOut"); 
+                }
             }
         }
 
@@ -173,8 +185,11 @@ namespace Airport.Classes
             }
             set
             {
-                _PeopleNumberOfLast24HoursOut = value;
-                OnPropertyChanged("PeopleNumberOfLast24HoursOut");
+                if (_PeopleNumberOfLast24HoursOut != value)
+                {
+                    _PeopleNumberOfLast24HoursOut = value;
+                    OnPropertyChanged("PeopleNumberOfLast24HoursOut"); 
+                }
             }
         }
 
@@ -189,8 +204,11 @@ namespace Airport.Classes
             }
             set
             {
-                _PeopleNumberOfAllPlanesOut = value;
-                OnPropertyChanged("PeopleNumberOfAllPlanesOut");
+                if (_PeopleNumberOfAllPlanesOut != value)
+                {
+                    _PeopleNumberOfAllPlanesOut = value;
+                    OnPropertyChanged("PeopleNumberOfAllPlanesOut"); 
+                }
             }
         }
         #endregion Поля-счетчики пассажиров

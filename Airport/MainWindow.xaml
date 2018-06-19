@@ -86,15 +86,60 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="В последнем рейсе: " />
-                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneIn}" />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneIn,
+                        NotifyOnTargetUpdated=True}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="Blue" To="LightBlue" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="Blue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="За последние 24 часа: " />
-                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursIn}" />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursIn,
+                        NotifyOnTargetUpdated=True}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="Blue" To="LightBlue" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="Blue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="За всё время: " />
-                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesIn}" />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesIn,
+                        NotifyOnTargetUpdated=True}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="Blue" To="LightBlue" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="Blue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -107,15 +152,60 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="В последнем рейсе: " />
-                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneOut}" />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLastPlaneOut,
+                        NotifyOnTargetUpdated=True}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="Blue" To="LightBlue" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="Blue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="За последние 24 часа: " />
-                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursOut}" />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfLast24HoursOut,
+                        NotifyOnTargetUpdated=True}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="Blue" To="LightBlue" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="Blue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="За всё время: " />
-                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesOut}" />
+                    <TextBlock Text="{Binding ElementName=Window, Path=Schedule.PeopleNumberOfAllPlanesOut,
+                        NotifyOnTargetUpdated=True}">
+                        <TextBlock.Triggers>
+                            <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="Blue" To="LightBlue" Duration="0:0:0.3"/>
+                                        <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="Blue" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </TextBlock.Triggers>
+                    </TextBlock>
                 </StackPanel>
             </StackPanel>
         </Grid>
