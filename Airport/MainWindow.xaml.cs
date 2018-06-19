@@ -1,14 +1,10 @@
-﻿using Airport.Classes;
-using System;
-using System.Configuration;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls.DataVisualization.Charting;
+using Airport.Classes;
 
 namespace Airport
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public Schedule Schedule { get; set; }
@@ -28,27 +24,28 @@ namespace Airport
 
         private bool LoadData()
         {
-            // получить путь к файлу с данными из app.config
-            string settingName = "DataPath";
-            string path = ConfigurationManager.AppSettings[settingName];
+            // получить путь к файлу с данными
+            string path = string.Empty;
 
-            if (string.IsNullOrWhiteSpace(path))
+            try
             {
-                MessageBox.Show($"Не указан путь к файлу в app.config (параметр {settingName})",
-                    "Данные не найдены", MessageBoxButton.OK, MessageBoxImage.Error);
+                path = Tools.GetDataPath();
+            }
+            catch (Exception exc)
+            {
+                Tools.ShowErrorMessage(exc.Message, "Данные не найдены");
                 Close();
                 return false;
             }
 
-            // вычитать список рейсов
+            // вычитать список рейсов и сформировать расписание
             try
             {
                 Schedule = new Schedule(path);
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message, "Ошибка при чтении файла",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                Tools.ShowErrorMessage(exc.Message, "Ошибка при чтении файла");
                 Close();
                 return false;
             }
