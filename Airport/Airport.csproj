@@ -70,6 +70,7 @@
     <Compile Include="Classes\PlaneDirection.cs" />
     <Compile Include="Classes\PlaneType.cs" />
     <Compile Include="Classes\Schedule.cs" />
+    <Compile Include="Classes\Tools.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

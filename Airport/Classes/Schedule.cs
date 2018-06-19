@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.IO;
-using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.ComponentModel;
@@ -215,14 +213,7 @@ namespace Airport.Classes
 
         public Schedule(string path)
         {
-            // вычитать данные
-            XmlSerializer serializer = new XmlSerializer(typeof(PlaneCollection));
-
-            using (StreamReader reader = new StreamReader(path))
-            {
-                PlaneCollection collection = (PlaneCollection)serializer.Deserialize(reader);
-                Planes = collection.Planes.ToArray();
-            }
+            Planes = Tools.LoadPlanes(path);
             
             // проставить случайное количество пассажиров
             Random random = new Random();
