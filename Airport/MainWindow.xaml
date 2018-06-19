@@ -212,7 +212,9 @@
 
         <!--Гистограмма-->
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <DVC:Chart Name="ChartAccumulation" Background="LightSteelBlue" FontSize="9">
+            <DVC:Chart Name="ChartAccumulation" Background="LightSteelBlue"
+                       Title="Количество пассажиров за последние 24 часа"
+                       FontSize="9" Foreground="Blue">
                 <DVC:Chart.Series>
                     <DVC:ColumnSeries IndependentValueBinding="{Binding Path=Key}"
                                       DependentValueBinding="{Binding Path=Value}">

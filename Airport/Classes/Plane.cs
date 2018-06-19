@@ -70,20 +70,18 @@ namespace Airport.Classes
         {
             get
             {
-                {
-                    Type type = typeof(PlaneType);
-                    MemberInfo[] memInfo = type.GetMember(Model.ToString());
-                    object[] attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-                    string modelStr = ((DescriptionAttribute)attributes[0]).Description;
+                Type type = typeof(PlaneType);
+                MemberInfo[] memInfo = type.GetMember(Model.ToString());
+                object[] attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                string modelStr = ((DescriptionAttribute)attributes[0]).Description;
                     
-                    string direction = Direction == PlaneDirection.In
-                        ? "прилетел из города"
-                        : "вылетел в город";
+                string direction = Direction == PlaneDirection.In
+                    ? "прилетел из города"
+                    : "вылетел в город";
 
-                    return $"{modelStr} {direction} {City} " +
-                        $"в {Time.ToString("HH:mm:ss dd.MM.yyyy")} " +
-                        $"с {NumberOfPassengers} пассажирами";
-                }
+                return $"{modelStr} {direction} {City} " +
+                    $"в {Time.ToString("HH:mm:ss dd.MM.yyyy")} " +
+                    $"с {NumberOfPassengers} пассажирами";
             }
         }
     }
