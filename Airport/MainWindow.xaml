@@ -10,6 +10,7 @@
         x:Name="Window"
         Title="Аэропорт" Height="400" Width="850" MinHeight="400" MinWidth="630">
     <Window.Resources>
+        <!--Градиент у блоков кол-ва пассажиров -->
         <LinearGradientBrush x:Key="Brush" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="LightCyan" Offset="0" />
             <GradientStop Color="LightSteelBlue" Offset="1" />
@@ -23,6 +24,7 @@
         <Style TargetType="Label">
             <Setter Property="Foreground" Value="Blue" />
         </Style>
+        <!--Последний рейс-->
         <Style TargetType="TextBlock" x:Key="LastPlane">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -51,8 +53,22 @@
 
             <!--Последний рейс-->
             <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                       Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString}"
-                       Style="{StaticResource LastPlane}" />
+                       Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString, NotifyOnTargetUpdated=True}"
+                       Style="{StaticResource LastPlane}">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Binding.TargetUpdated">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="SteelBlue" To="LightBlue" Duration="0:0:0.3"/>
+                                <ColorAnimation BeginTime="0:0:0.3" 
+                                                Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)" 
+                                                From="LightBlue" To="SteelBlue" Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
 
             <!--Текущее время-->
             <StackPanel Margin="5"

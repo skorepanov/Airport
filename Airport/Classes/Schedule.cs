@@ -82,8 +82,11 @@ namespace Airport.Classes
             }
             set
             {
-                _LastPlane = value;
-                OnPropertyChanged("LastPlane");
+                if (_LastPlane != value)
+                {
+                    _LastPlane = value;
+                    OnPropertyChanged("LastPlane");
+                }
             }
         }
 
