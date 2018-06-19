@@ -20,7 +20,7 @@ namespace Airport.Classes
 
             if (string.IsNullOrWhiteSpace(path))
             {
-                throw new Exception($"Не указан путь к файлу в App.config (параметр {DataPathKey})");
+                throw new ConfigurationErrorsException($"Не указан путь к файлу в App.config (параметр {DataPathKey})");
             }
 
             return path;

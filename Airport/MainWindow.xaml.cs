@@ -7,10 +7,14 @@ namespace Airport
 {
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Расписание самолётов
+        /// </summary>
         public Schedule Schedule { get; set; }
 
         public MainWindow()
         {
+            // загрузить данные
             bool dataLoaded = LoadData();
 
             if (!dataLoaded)
@@ -22,6 +26,10 @@ namespace Airport
             ((ColumnSeries)ChartAccumulation.Series[0]).ItemsSource = Schedule.Accumulation;
         }
 
+        /// <summary>
+        /// Загрузить данные
+        /// </summary>
+        /// <returns>True в случае успешной загрузки, иначе False</returns>
         private bool LoadData()
         {
             // получить путь к файлу с данными
@@ -49,6 +57,9 @@ namespace Airport
                 Close();
                 return false;
             }
+
+            // запустить имитацию
+            Schedule.StartImitation();
 
             return true;
         }

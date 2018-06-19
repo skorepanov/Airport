@@ -6,6 +6,9 @@ using System.ComponentModel;
 
 namespace Airport.Classes
 {
+    /// <summary>
+    /// Расписание самолётов
+    /// </summary>
     public class Schedule : INotifyPropertyChanged
     {
         private int _ImitationSpeed = 1;
@@ -227,23 +230,26 @@ namespace Airport.Classes
             ImitationSpeed = 1;
 
             CountPassengers();
-
-            // запустить таймер
-            CreateTimer();
         }
 
-        public void CreateTimer()
+        /// <summary>
+        /// Запустить имитацию
+        /// </summary>
+        public void StartImitation()
         {
             Task.Factory.StartNew(() =>
             {
                 System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Elapsed += ImitationTick;
+                timer.Elapsed += NextStep;
                 timer.Interval = ImitationSpeed * 1000;
                 timer.Start();
             });
         }
 
-        public void ImitationTick(object sender, EventArgs e)
+        /// <summary>
+        /// Следующий шаг имитации
+        /// </summary>
+        private void NextStep(object sender, EventArgs e)
         {
             CurrentTime = CurrentTime.AddMilliseconds(ImitationSpeed * 1000);
             CountPassengers();
