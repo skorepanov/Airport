@@ -87,7 +87,24 @@ namespace Airport.Classes
                 {
                     _LastPlane = value;
                     OnPropertyChanged("LastPlane");
+                    OnPropertyChanged("LastPlaneString");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Последний рейс на текущий момент строкой
+        /// </summary>
+        public string LastPlaneString
+        {
+            get
+            {
+                if (_LastPlane != null)
+                {
+                    return _LastPlane.ToString(); 
+                }
+
+                return "Рейсов не было";
             }
         }
 

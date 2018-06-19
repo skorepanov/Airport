@@ -53,7 +53,7 @@
 
             <!--Последний рейс-->
             <TextBlock Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                       Text="{Binding ElementName=Window, Path=Schedule.LastPlane.ByString, NotifyOnTargetUpdated=True}"
+                       Text="{Binding ElementName=Window, Path=Schedule.LastPlaneString, NotifyOnTargetUpdated=True}"
                        Style="{StaticResource LastPlane}">
                 <TextBlock.Triggers>
                     <EventTrigger RoutedEvent="Binding.TargetUpdated">
